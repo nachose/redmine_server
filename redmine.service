@@ -1,0 +1,15 @@
+[Unit]
+Description=Redmine Docker Service
+Requires=docker.service
+After=docker.service
+
+[Service]
+WorkingDirectory=/home/nacho/workshop/redmine_server
+ExecStart=/usr/bin/docker compose up --remove-orphans
+ExecStop=/usr/bin/docker compose down
+Restart=always
+User=youruser
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target
