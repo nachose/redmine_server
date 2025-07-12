@@ -58,3 +58,14 @@ To test the restore process without actually changing any files, use the `--dry-
 ```
 
 **Warning:** This will overwrite the current database and files with the content of the backup.
+
+## Login into the redmine databse:
+
+To log into the Redmine database, you can use the following command:
+
+```bash
+docker exec -it redmine-db bash
+
+mysql -u redmine -p
+```
+password: `redminepass`
