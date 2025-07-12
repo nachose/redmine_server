@@ -33,29 +33,29 @@ if [ "$DRY_RUN" = true ]; then
   echo "Backup files found."
   echo "---"
   echo "Would stop Redmine services:"
-  echo "docker-compose down"
+  echo "docker compose down"
   echo "---"
   echo "Would restore database with the following commands:"
-  echo "docker-compose up -d db"
+  echo "docker compose up -d db"
   echo "cat \"$SRC_DIR/redmine_db.sql\" | docker exec -i redmine-db mysql -u redmine -predminepass redmine"
-  echo "docker-compose stop db"
+  echo "docker compose stop db"
   echo "---"
   echo "Would restore Redmine files with the following command:"
   echo "docker run --rm --volumes-from redmine -v \"$SRC_DIR\":/backup busybox sh -c \"echo 'Would remove and extract files'\""
   echo "---"
   echo "Would restart Redmine services:"
-  echo "docker-compose up -d"
+  echo "docker compose up -d"
   echo "--- DRY RUN COMPLETE ---"
 else
   # Stop the services
   echo "Stopping Redmine services..."
-  docker-compose down
+  docker compose down
 
   # Restore the database
   echo "Restoring database..."
-  docker-compose up -d db
+  docker compose up -d db
   cat "$SRC_DIR/redmine_db.sql" | docker exec -i redmine-db mysql -u redmine -predminepass redmine
-  docker-compose stop db
+  docker compose stop db
 
   # Restore the redmine files
   echo "Restoring Redmine files..."
@@ -64,7 +64,7 @@ else
 
   # Restart the services
   echo "Starting Redmine services..."
-  docker-compose up -d
+  docker compose up -d
 
   echo "Restore complete."
 fi
